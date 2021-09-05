@@ -7,7 +7,7 @@ symbol_first = "SETFNIF50.XNSE"
 symbol_second = "SETFNN50.XNSE"
 base_url = "http://api.marketstack.com/v1/tickers"
 params = {"access_key": os.environ.get("MARKETSTACK_KEY")}  # store in env
-print(params)
+
 
 def filter_weekend_dates(date_):
     # since market is closed on weekends
@@ -33,7 +33,10 @@ def get_tracking_error(eod1, eod2, eoy1, eoy2):
     print("Getting tracking error...")
     result1 = eod1 / (eoy1 - 1) * 100
     result2 = eod2 / (eoy2 - 1) * 100
-    return result1 - result2
+    result = result1 - result2
+    data = {"result": result}
+    return(requests.post("some_url", data=data))
+    
 
 
 if __name__ == "__main__":
